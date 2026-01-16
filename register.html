@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor / Guide Registration Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .form-container {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .required {
+            color: #e74c3c;
+            margin-left: 3px;
+        }
+
+        .instruction {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            font-weight: 400;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="url"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        input[type="url"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 40px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-group.invalid input,
+        .form-group.invalid select,
+        .form-group.invalid textarea {
+            border-color: #e74c3c;
+        }
+
+        .form-group.invalid .error {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-message h3 {
+            margin-bottom: 10px;
+            color: #28a745;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .header {
+                padding: 25px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .radio-group {
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Mentor / Guide Registration Form</h1>
+            <p>This form is to collect details from individuals interested in guiding students.</p>
+        </div>
+
+        <div class="form-container">
+            <form id="mentorForm" novalidate>
+                <div class="success-message" id="successMessage">
+                    <h3>✓ Registration Successful!</h3>
+                    <p>Thank you for registering as a mentor. We will contact you soon.</p>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="access_key" value="a5a684c2-f8a5-4250-ae07-76c2062d9497">
+                    <label for="fullName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    <span class="error">Please enter your full name</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    <span class="error">Please enter a valid email address</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Number (Preferably WhatsApp) <span class="required">*</span></label>
+                    <input type="tel" id="contact" name="contact" placeholder="Enter your WhatsApp number" required>
+                    <span class="error">Please enter your contact number</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="source">How did you hear about us? <span class="required">*</span></label>
+                    <select id="source" name="source" required>
+                        <option value="">Select an option</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="referral">Friend / Referral</option>
+                        <option value="college">College / University</option>
+                        <option value="website">Website</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <span class="error">Please select an option</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" name="dob" required>
+                    <span class="error">Please enter your date of birth</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="state">Which state are you residing in now? <span class="required">*</span></label>
+                    <select id="state" name="state" required>
+                        <option value="">Select your state</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Ladakh">Ladakh</option>
+                        <option value="Lakshadweep">Lakshadweep</option>
+                        <option value="Puducherry">Puducherry</option>
+                    </select>
+                    <span class="error">Please select your state</span>
+                </div>
+
+                <div class="form-group">
+                    <label>What is your career stage? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="studying" name="careerStage" value="studying" required>
+                            <label for="studying">Studying</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="job" name="careerStage" value="job">
+                            <label for="job">Job</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="jobTrials" name="careerStage" value="jobTrials">
+                            <label for="jobTrials">Job Trials</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="business" name="careerStage" value="business">
+                            <label for="business">Business</label>
+                        </div>
+                    </div>
+                    <span class="error">Please select your career stage</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="education">Highest education qualification or what you are pursuing now <span class="required">*</span></label>
+                    <span class="instruction">Mention degree, specialization, and institution</span>
+                    <textarea id="education" name="education" placeholder="E.g., B.Tech in Computer Science, XYZ University" required></textarea>
+                    <span class="error">Please provide your education details</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobDetails">Job / Business details</label>
+                    <span class="instruction">Mention designation and company name (if applicable)</span>
+                    <textarea id="jobDetails" name="jobDetails" placeholder="E.g., Software Engineer at ABC Company"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>How many hours are you available per week?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="hour1" name="availability" value="1 hour">
+                            <label for="hour1">1 hour</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hour1to2" name="availability" value="1–2 hours">
+                            <label for="hour1to2">1–2 hours</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hour2to5" name="availability" value="2–5 hours">
+                            <label for="hour2to5">2–5 hours</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="hour5plus" name="availability" value="5+ hours">
+                            <label for="hour5plus">5+ hours</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="domain">In which subject / domain do you want to guide students? <span class="required">*</span></label>
+                    <input type="text" id="domain" name="domain" placeholder="E.g., Web Development, Data Science, Career Counseling" required>
+                    <span class="error">Please specify your guidance domain</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="cvLink">Link to your CV <span class="required">*</span></label>
+                    <span class="instruction">Upload your CV to Google Drive and share the link</span>
+                    <input type="url" id="cvLink" name="cvLink" placeholder="https://drive.google.com/..." required>
+                    <span class="error">Please provide a valid CV link</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="queries">Any queries or additional information?</label>
+                    <textarea id="queries" name="queries" placeholder="Feel free to share any questions or additional details..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Register as a Mentor</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        //form validation
+       const form = document.getElementById('mentorForm');
+       const submitBtn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Success! Your message has been sent.");
+                    form.reset();
+                } else {
+                    alert("Error: " + data.message);
+                }
+
+            } 
+            catch (error) {
+                alert("Something went wrong. Please try again.");
+            } 
+            finally {
+                submitBtn.textContent = originalText;
+                 submitBtn.disabled = false;
+            }
+        });
+
+
+    </script>
+</body>
+</html>

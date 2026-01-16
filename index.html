@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <title>Sahaay EduMap</title>
+</head>
+<style>
+    :root{
+        --background: 210 40% 98%;
+        --secondary-foreground: 152 45% 25%;
+        --secondary: 152 45% 92%;
+        --gradient-primary: linear-gradient(135deg, hsl(210 85% 45%) 0%, hsl(210 85% 55%) 100%);
+        --card: 0 0% 100%;
+        --charcoal: 0 0% 10%;
+    }
+    body{
+        margin:0px;
+        padding:0px;
+        background-color:hsl(var(--background));
+    }
+    header{
+        width:100dvw;
+        background-color: transparent;
+        display:flex;
+        justify-content: space-around;
+        position: fixed;
+    }
+    header.stop {
+      position: absolute;
+    }
+    header.scrolled{
+        background-color: white;
+        color: black;
+    }
+    #Htext{
+        margin:0px;
+    }
+    #logo{
+        display: flex;
+    }
+    #nav{
+        display: flex;
+        gap:5rem;
+        justify-content: space-around;
+    }
+    #nav a{
+        width: max-content;
+        text-decoration: none;
+        font-weight: 500;
+        color:rgb(27, 26, 26);
+        font-size: 1.2rem;
+    }
+    #navLinks{
+        display: none;
+    }
+    #home{
+        height: 100dvh;
+        width: 100dvw;
+        display: flex;
+        background:
+          radial-gradient(
+            circle at left center,
+          rgba(180, 240, 220, 0.35),
+            transparent 40%
+         ),
+        radial-gradient(
+           circle at right center,
+         rgba(180, 210, 255, 0.35),
+           transparent 40%
+        ),#f8fbff;
+    }
+    .text{
+        display: flex;
+        width: 100dvw;
+        text-align: center;
+        position: absolute;
+        margin-top: 15dvh;
+        justify-content: center;
+    }
+    #textContent{
+        display: flex;
+        background-color: hsl(var(--secondary));
+        color:hsl(var(--secondary-foreground));
+        width: max-content;
+        gap:2px;
+        border-radius: 5px;
+    }
+    #book{
+        font-size: 1.1rem;
+    }
+    .Hbody{
+        position:absolute;
+        top:25dvh;
+        display: flex;
+        justify-content: center;
+        width:100dvw;
+        margin:0px;
+    }
+    #HbodyContent h1{
+        margin: 0%;
+        font-size: 3.5rem;
+        width: 100dvw;
+        text-align: center;
+    }
+    .playfair-display-h1 {
+        font-family: "Playfair Display", serif;
+        font-optical-sizing: auto;
+        font-weight: bold;
+        font-style: normal;
+    }
+    #HbodyHeadline p{
+        font-family: 'Google Sans', sans-serif;
+        margin: 0%;
+        width: 100dvw;
+        text-align: center;
+        font-size: larger;
+    }
+    .Hbody1{
+        position:absolute;
+        top:46dvh;
+        display: flex;
+        justify-content: center;
+        width:100dvw;
+        margin:0px;
+    }
+    #button{
+        display: flex;
+        position: absolute;
+        top:60dvh;
+        width: 100dvw;
+        justify-content: center;
+        gap:2rem;
+        flex-wrap: wrap;
+    }
+    #button a button{
+        width:255px;
+        height:53px;
+        font-size: larger;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border-radius: 10px;
+        cursor: pointer;;
+    }
+    #button a button:hover{
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+    }
+    #button2:hover{
+        background-color: hsl(var(--gradient-primary));
+    }
+    #Chome{
+        position: absolute;
+        top:75dvh;
+        display: flex;
+        justify-content: space-evenly;
+        width: 100dvw;
+    }
+    .font{
+        font-family: 'Google Sans', sans-serif;
+        font-size: x-large;
+        margin: 0px;
+    }
+    #About{
+        height:100dvh;
+        display: flex;
+    }
+    #Aboutcontent{
+        margin-top: 10dvh;
+    }
+    #Aheading{
+        margin-left:20px;
+        color:rgb(72, 184, 222)
+    }
+    .Aheading{
+        margin:0px;
+        margin-left: 20px;
+        font-weight: bold;
+        font-size: xx-large;
+    }
+    .Apara{
+        margin-left: 20px;
+        width:45dvw;
+        font-size: large;
+    }
+    .floatA{
+        display: block;
+        margin-left: 20px;
+    }
+    .Afloat{
+        display:flex;
+        gap:10px;
+        margin-top: 10px;
+    }
+    .AfloatContent h3{
+        margin:0px;
+        font-weight: 600;
+    }
+    .AfloatContent p{
+        margin:0px;
+    }
+    #symbol1{
+        font-size: x-large;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:40px;
+        background-color: blue;
+        border-radius: 10px;
+    }
+    #symbol2{
+        font-size: x-large;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:40px;
+        background-color: blue;
+        border-radius: 10px;
+    }
+    #symbol3{
+        font-size: x-large;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:40px;
+        background-color: blue;
+        border-radius: 10px;
+    }
+    .Aimage{
+        margin-top: 13dvh;
+        margin-left: 20px;
+        width:45dvw;
+        height: 68dvh;
+        background-color: white;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        justify-content: center;
+    }
+    #Aimg{
+        width:55%;
+        height:65%;
+        background-color: black;
+        margin-top: 7%;
+        margin-left: 25%;
+        display: flex;
+        background-image: url(/img/about\ img.png);
+        background-size: cover;
+
+    }
+    #AimgP{
+        text-align: center;
+        font-size: large;
+        margin-bottom: 0px;
+    }
+    #contact{
+        height:auto;
+        margin:0px;
+    }
+    #Contact1{
+        position:relative;
+        display:flex;
+        flex-wrap: wrap;
+        gap:20px;
+        justify-content: space-evenly;
+    }
+    #Ccontent{
+        width:45dvw;
+        height: max-content;
+        margin-left: 30px;
+        margin-top: 10dvh;
+    }
+    #Cheading{
+        color:rgb(72, 184, 222)
+    }
+    #Cheadingcontent{
+        font-size: 50px;
+        margin-top: 2dvh;
+        margin: 0%;
+    }
+    .Cheading{
+        margin: 0%;
+        font-size: large;
+    }
+    .Cflexbox{
+        background-color: white;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        width:55%;
+        height:13%;
+        margin:3dvw;
+        margin-top: 2dvw;
+        margin-bottom: 2dvw;
+        border-radius: 10px;
+        display: flex;
+    }
+    .Cflexbox i{
+        font-size: x-large;
+        margin:2dvh;
+        background-color: blue;
+        padding:5px;
+        border-radius: 5px;
+    }
+    .Cflexcontent{
+        display:block;
+        padding:10px;
+    }
+    .CflexTitle{
+        font-size:large;
+        margin: 0%;
+    }
+    #Ccontent a{
+        text-decoration: none;
+        color:black
+    }
+    #Cform{
+        margin-top: 13dvh;
+        width:35dvw;
+        height: 51dvh;
+        background-color:hsl(var(--card));
+        border-radius: 10px;
+    }
+    #Fheading{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+    }
+    .input1{
+        padding:10px;
+        width:90%;
+        height:5%;
+        background-color:hsl(var(--gradient-primary));
+        border:1px solid black;
+    }
+    .fTitle{
+        font-family:'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+    #FormContent{
+        padding:20px;
+    }
+    #tr1{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    #tr2{
+        display: flex;
+        margin-left: 8%;
+    }
+    .input{
+        width:91%;
+        height:30px;
+        background-color:hsl(var(--gradient-primary));
+        border:1px solid black;
+    }
+    #tr3{
+        display: flex;
+        margin-left: 8%;
+    }
+    .input2{
+        width:91%;
+        height:60px;
+        background-color:hsl(var(--gradient-primary));
+    }
+    #tr4{
+        display:flex;
+        margin-left: 8%;
+        margin-top:15px ;
+    }
+    #tr4 button{
+        width:91%;
+        height:40px;
+        background-color: rgb(85, 85, 243);
+        color:black;
+        border:2px solid black;
+    }
+    #JHeading{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        font-size: xx-large;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    #Jbutton{
+        display: flex;
+        justify-content: center;
+        width:100dvw;
+    }
+    #Jbutton button{
+        width:100px;
+        height: 50px;
+        border-radius: 20px;
+        background-color: blue;
+        color:black;
+        font-weight: bold;
+    }
+    footer{
+        margin-top: 20px;
+        width:100dvw;
+        background-color: hsl(var(--secondary));
+        display: flex;
+        justify-content: space-evenly;
+    }
+    #FFirst{
+     margin-left: 20px;
+    }
+    #FFirst h1{
+        margin-bottom: 1px;
+        margin-top: 1px;
+    }
+    #FFirst p{
+        width: 25dvw;
+        font-size: medium;
+        margin: 0%;
+    }
+    #Quicklinks h2{
+       margin-top: 1px;
+    }
+    #Qlinks ul a{
+        text-decoration: none;
+        color:black;
+    }
+    #followA h2{
+        margin-top: 1px;
+    }
+    
+
+    @media screen and (max-width: 768px) {
+        html,body{
+            overflow-x: hidden;
+        }
+        header{
+            display: block;
+        }
+        #navLinks{
+            display: flex;
+            font-size: x-large;
+            margin:10px
+        }
+        #nav{
+            width: 100dvw;
+            display: block;
+            background-color:#faf7f2 ;
+            padding:10px;
+            display: none;
+        }
+        #nav a{
+            display: block;
+            color:black;
+            font-size:x-large;
+        }
+        #content{
+            display: flex;
+            width: 100dvw;
+            justify-content: space-between;
+        }
+    
+        #HbodyContent h1{
+          margin: 0%;
+          font-size: 2.5rem;
+          width: 100dvw;
+          text-align: center;
+        }
+        .Hbody1{
+            top:38dvh;
+        }
+        #HbodyHeadline p{
+          font-family: 'Google Sans', sans-serif;
+          margin: 0%;
+          width: 100dvw;
+          text-align: center;
+          font-size: small;
+        }
+        #button{
+            top:50dvh;
+        }
+        #About{
+            display: block;
+            height: auto;
+        }
+        #Aheading{
+        text-align: center;
+       }
+       .Aheading{
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+       }
+        .Apara{
+        width:90%;
+        justify-content: justify;
+       }
+       .Aimage{
+        margin-top:5dvh;
+        width:100dvw;
+        height: 50dvh;
+        }
+        #Aimg{
+        width:91%;
+        height:65%;
+        background-color: black;
+        margin-top: 7%;
+        margin-left: 3%;
+        display: flex;
+        background-image: url(/img/about\ img.png);
+        background-size: cover;
+        }
+        #AimgP{
+            width: 95%;;
+        }
+        #Ccontent{
+          width:100dvw;
+          height: max-content;
+          margin-left: 0px;
+          margin-top: 10dvh;
+       }
+       .Cflexbox{
+         width:95%;
+         height:23%;
+         margin-top: 30px;
+        }
+        .Cfont{
+            margin:0px;
+            font-size: medium;
+        }
+        #Cform{
+           width:100dvw;
+           height:max-content;
+           margin:20px;
+       }
+       .input1{
+          padding:10px;
+          width:80%;
+       }
+       #tr2{
+        margin-left: 0%;
+       }
+       .input{
+         width:94%;
+        }
+        #tr3{
+          margin-left: 0%;
+       }
+       .input2{
+         width:94%;
+        }
+       #tr4{
+        margin-left: 0%;
+       }
+       #tr4 button{
+         width:94%;
+       }
+       #JHeading{
+        font-size: large;
+       }
+       footer{
+        display: block;
+        width: auto;
+       }
+       #FFirst{
+        margin-left:0px;
+       }
+       #FFirst h1{
+        margin-bottom: 1px;
+        margin-top: 1px;
+       }
+       #FFirst p{
+         width: 100dvw;
+         font-size: medium;
+         margin: 0%;
+        }
+        #Quicklinks{
+            margin-top: 20px;
+        }
+        #followA{
+            margin-top: 20px;
+        }
+    }
+</style>
+<body>
+    <!-- header -->
+    <header id="mainHeader">
+        <div id="content">
+          <div id="logo">
+            <img src="/img/logo.jpeg" width="50" height="50">
+            <h3 id="Htext">Sahaay<br>EduMap</h3>
+         </div>
+         <i class="fa fa-bars" id="navLinks" onclick="touch()"></i>
+        </div>
+        <nav id="nav">
+            <a href="#home">Home</a>
+            <a href="#About">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#contact">Join Us</a>
+        </nav>
+    </header>
+    <!-- home section -->
+    <section id="home">
+        <div class="text">
+            <div id="textContent">
+                <i class="fa-solid fa-book-open" id="book"></i>
+                <p style="margin: 0%;">Empowering Students Across India</p>
+            </div>
+        </div>
+        <div class="Hbody">
+            <div id="HbodyContent">
+                 <h1 class="playfair-display-h1">Your Learning</h1>
+                 <h1 class="playfair-display-h1">Path,<span style="color: rgb(66, 66, 208);">Made Simple</span></h1>
+            </div>
+        </div>
+        <div class="Hbody1">
+            <div id="HbodyHeadline">
+                <p>Guidance, resources, and AI-powered support for students. Get</p>
+                <p>personalized exam prep, career advice, and 24/7 assistance.</p>
+            </div>
+        </div>
+        <div id="button">
+            <a href="#contact">
+                <button style="background-color: hsl(var(--gradient-primary));">Contact US</button>
+
+            </a>
+            <a href="#About">
+                <button id="button2">About US</button>
+            </a>
+        </div>
+        <div id="Chome">
+            <div style="display: block; text-align: center;">
+                <h3 class="font">1+</h3>
+                <p style="margin:0px;">Students Helped</p>
+            </div>
+            <div style="display: block; text-align: center;">
+                <h3 class="font">24/7</h3>
+                <p style="margin:0px;">Live Assitance</p>
+            </div>
+            <div style="display: block; text-align: center;">
+                <h3 class="font">500+</h3>
+                <p style="margin:0px;">Resources</p>
+            </div>
+        </div>
+    </section>
+    <!-- About us section -->
+    <section id="About">
+        <!-- text Content -->
+        <div id="Aboutcontent">
+          <h3 id="Aheading">About Us</h3>
+          <h1 class="Aheading">Bridging the Education Gap for</h1>
+          <h1 class="Aheading">Every Student</h1>
+          <p class="Apara">SaHaay EduMap was founded by Dande Satish (B.Sc. Statistics) and Guttula Harsha Vardhan (M.Sc. Bioinformatics), two young visionaries from a reputed Central University. </p>
+          <p class="Apara">
+            They identified a major gap where many talented rural students lack awareness about competitive exams, scholarships, and quality educational opportunities. To bridge this gap, they launched SaHaay EduMap with a clear mission—to provide the right guidance and information to students across rural India.Whether you're preparing for competitive exams in a small town or seeking career guidance in a bustling city, we are here to help you navigate your educational journey with confidence.
+          </p>
+          <div class="floatA">
+            <div class="Afloat">
+                <i class="fa-solid fa-heart" id="symbol1"></i>
+                <div class="AfloatContent">
+                    <h3>Student-First Approach</h3>
+                    <p>We design every feature keeping your needs and challenges in mind.</p>
+                </div>
+            </div>
+          </div>
+          <div class="floatA">
+            <div class="Afloat">
+                <i class="fa-solid fa-user-graduate" id="symbol2"></i>
+                <div class="AfloatContent">
+                    <h3>Inclusive Education</h3>
+                    <p>Supporting students from all backgrounds with accessible resources.</p>
+                </div>
+            </div>
+          </div>
+          <div class="floatA">
+            <div class="Afloat">
+                <i class="fa-solid fa-crosshairs" id="symbol3"></i>
+                <div class="AfloatContent">
+                    <h3>Goal-Oriented Guidance</h3>
+                    <p>Personalized roadmaps to help you achieve your academic dreams.</p>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- image Content -->
+        <div class="Aimage">
+            <div id="Aimg"></div>
+            <br>
+            <p id="AimgP">SaHaay EduMap guides students with expert mentorship, real-time exam and scholarship updates, and personalized support to help them confidently plan their education and career journey</p>
+        </div>
+    </section>
+    <section id="contact">
+        <!-- contact us section -->
+       <div id="Contact1">
+          <!-- General information -->
+         <div id="Ccontent">
+            <h3 id="Cheading">Contact Us</h3>
+            <h1 id="Cheadingcontent">We're Here to Help</h1>
+            <p class="Cheading">Have questions or need assistance? Reach out to us and we'll respond</p>
+            <P class="Cheading" style="margin-top: 0px;">as quickly as possible.</P>
+            <div class="Cflexbox">
+               <a href="">
+                 <i class="fa-regular fa-envelope"></i>
+               </a>
+               <div class="Cflexcontent">
+                <p class="CflexTitle">Email Us</p>
+                <p class="Cfont">sahaayedumap@gmail.com</p>  
+               </div>
+            </div>
+            <div class="Cflexbox">
+                <a href="">
+                 <i class="fa-solid fa-phone-volume"></i>
+               </a>
+                <div class="Cflexcontent">
+                  <p class="CflexTitle">Whatsapp Support</p>
+                  <p class="Cfont">Chat With us on whatsapp</p>  
+               </div>
+            </div>
+         </div>
+         <!-- Contact Form  -->
+         <div id="Cform">
+            <h3 id="Fheading">Send As a Message</h3>
+            <form action="https://api.web3forms.com/submit" method="POST" id="form">
+                <div id="FormContent">
+                 <input type="hidden" name="access_key" value="a5a684c2-f8a5-4250-ae07-76c2062d9497">
+                 <div id="tr1">
+                  <div>
+                    <label for="name" class="fTitle">Name:</label>
+                    <br>
+                    <input type="text" placeholder="Enter your name" class="input1" id="name" name="Name" required>
+                  </div>
+                  <div>
+                    <label for="email" class="fTitle">Email:</label>
+                    <br>
+                    <input type="text" placeholder="Enter your email" class="input1" id="email" name="Email" required>
+                  </div>
+                 </div>
+                 <div id="tr2">
+                    <div style="display: block; width:100%;">
+                        <label for="subject" class="fTitle">Subject:</label>
+                        <br>
+                        <input type="text" placeholder="How we can help you?" class="input" id="subject" name="Subject" required>
+                    </div>
+                 </div>
+                 <div id="tr3" style="margin-top: 20px;">
+                    <div  style="display: block; width:100%;">
+                       <label for="message" class="fTitle">Message</label>
+                       <br>
+                       <textarea placeholder="Explain the question" id="message" class="input2" name="message" required></textarea>
+                    </div>
+                 </div>
+                 <div id="tr4">
+                    <button type="submit">Send Message</button>
+                 </div>
+                </div>
+            </form>
+         </div>
+       </div>
+       <div id="joinus">
+         <h1 id="JHeading">Interested to join with us?</h1>
+         <a href="register.html" id="Jbutton">
+            <button>Register</button>
+         </a>
+       </div>
+       <footer>
+        <div id="FFirst">
+            <h1>Sahaayedumap</h1>
+            <p>To provide the right guidance and information to students across rural India.</p>
+        </div>
+        <div id="Quicklinks">
+            <h2>Quicklinks</h2>
+            <div id="Qlinks" style="display:block;">
+                <ul style="list-style-type: none;">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#About">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="register.html">Join Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="followA">
+            <h2>Follow Us</h2>
+            <div id="Slink">
+                <a href="https://www.youtube.com/@SahaayEduMap"><i class="fa-brands fa-youtube fa-2x" style="margin-right: 10px; color: rgb(181, 44, 44);"></i></a>
+                <a href="https://whatsapp.com/channel/0029VazeWb29Gv7TyAti4Z10"><i class="fa-brands fa-whatsapp fa-2x" style="margin-right: 10px; color: rgb(42, 208, 100);"></i></a>
+                <a href="https://www.instagram.com/sahaay_edumap"><i class="fa-brands fa-instagram fa-2x" style="margin-right: 10px; color: rgb(193, 53, 132);"></i></a>
+            </div>
+
+        </div>
+
+      </footer>
+    </section>
+</body>
+<script>
+    // Change header background on scroll
+      const header = document.getElementById("mainHeader");
+      const contactSection = document.getElementById("contact");
+
+      const headerHeight = header.offsetHeight;
+
+      window.addEventListener("scroll", () => {
+        const contactTop = contactSection.getBoundingClientRect().top;
+        const scrollY = window.scrollY;
+
+    // background change (already irukura logic)
+        if (scrollY > 50) {
+          header.classList.add("scrolled");
+        } 
+        else {
+          header.classList.remove("scrolled");
+        }
+
+    // 🔥 STOP HEADER when contact section reaches
+        if (contactTop <= headerHeight) {
+          header.classList.add("stop");
+          header.style.top =
+            window.scrollY + contactTop - headerHeight + "px";
+        } 
+        else {
+          header.classList.remove("stop");
+          header.style.top = "0px";
+        }
+      });
+
+  // Toggle navigation links on mobile
+   var navigation =document.getElementById("nav");
+   function touch(){
+    if (navigation.style.display==="none"){
+        navigation.style.display="block";
+    }
+    else{
+        navigation.style.display="none";
+    }
+   }
+   //form validation
+   const form = document.getElementById('form');
+   const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const originalText = submitBtn.textContent;
+
+        submitBtn.textContent = "Sending...";
+        submitBtn.disabled = true;
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert("Success! Your message has been sent.");
+                form.reset();
+            } else {
+                alert("Error: " + data.message);
+            }
+
+        } 
+        catch (error) {
+            alert("Something went wrong. Please try again.");
+        } 
+        finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+
+</script>
+
+</html>
